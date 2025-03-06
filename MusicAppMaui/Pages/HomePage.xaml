@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicAppMaui.Pages.HomePage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            
+             <Label Text="Tendencias en Artistas"
+                    Style="{StaticResource Headline}"
+                    FontAttributes="Bold"
+                    SemanticProperties.HeadingLevel="Level1" 
+                    HorizontalTextAlignment="Start"
+                    HorizontalOptions="Start"/>
+
+            <CollectionView x:Name="ArtistsCollection"
+                            ItemsSource="{Binding Artists}"
+                            SelectedItem="{Binding SelectedArtist}"
+                            SelectionChangedCommand="{Binding ShowArtistDetailCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ArtistsCollection}}"
+                            ItemsLayout="HorizontalList"
+                            SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="140" />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border StrokeThickness="0"
+                                    Background="Black"
+                                    StrokeShape="RoundRectangle 70"
+                                    HeightRequest="140"
+                                    WidthRequest="140">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" 
+                                            Radius="15" 
+                                            Offset="0,0" 
+                                            Opacity="0.3"/>
+                                </Border.Shadow>
+                                <Image Source="{Binding ArtistThumbnail}" 
+                                       Aspect="AspectFill"
+                                       HeightRequest="140"
+                                       WidthRequest="140">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="70,70" RadiusX="70" RadiusY="70"/>
+                                    </Image.Clip>
+                                </Image>
+                            </Border>
+                            <Label Grid.Row="1"
+                                   Text="{Binding Name}"
+                                   LineBreakMode="TailTruncation"
+                                   VerticalOptions="Start"
+                                   FontAttributes="Bold"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+            <Label Text="Tendencias en Discos"
+                   Style="{StaticResource Headline}"
+                   FontAttributes="Bold"
+                   SemanticProperties.HeadingLevel="Level1" 
+                   HorizontalTextAlignment="Start"
+                   HorizontalOptions="Start"/>
+
+
+            <CollectionView x:Name="AlbumsCollection"
+                            ItemsSource="{Binding Albums}"
+                            SelectedItem="{Binding SelectedAlbum}"
+                            SelectionChangedCommand="{Binding ShowAlbumDetailCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference AlbumsCollection}}"
+                            ItemsLayout="HorizontalList"
+                            SelectionMode="Single">    
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="140" />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border StrokeThickness="0"
+                                     Background="Black"
+                                     StrokeShape="RoundRectangle 10"
+                                     HeightRequest="140"
+                                     WidthRequest="140">        
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" 
+                                 Radius="15" 
+                                 Offset="0,0" 
+                                 Opacity="0.3"/>
+                                </Border.Shadow>
+                                <Image Source="{Binding Picture}" 
+                                        Aspect="AspectFill"
+                                        HeightRequest="140"
+                                        WidthRequest="140"> 
+                                </Image>
+                            </Border>
+                            <Label Grid.Row="1"
+                                    Text="{Binding Title}"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    WidthRequest="140"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Start"
+                                    FontAttributes="Bold"/>
+                            <Label Grid.Row="2"
+                                    Text="{Binding Artist.Name}"
+                                    MaxLines="1"
+                                    WidthRequest="140"
+                                    HorizontalOptions="Fill"
+                                    LineBreakMode="TailTruncation"
+                                    TextColor="LightGrey"
+                                    VerticalOptions="Start"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

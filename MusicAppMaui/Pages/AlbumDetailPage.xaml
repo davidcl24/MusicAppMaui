@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MusicAppMaui.Pages.AlbumDetailPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="120" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout>
+                <Grid Padding="10" HorizontalOptions="Start">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="230"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="160" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border StrokeThickness="0"
+                            Background="Black"
+                            StrokeShape="RoundRectangle 10"
+                            HeightRequest="200"
+                            WidthRequest="200"
+                            Grid.RowSpan="2">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" 
+                                    Radius="15" 
+                                    Offset="0,0" 
+                                    Opacity="0.3"/>
+                        </Border.Shadow>
+                        <Image Source="{Binding CurrentAlbum.Picture}" 
+                               Aspect="AspectFill"
+                               HeightRequest="200"
+                               WidthRequest="200">
+                        </Image>
+                    </Border>
+
+                    <Label Grid.Column="1"
+                           Text="{Binding CurrentAlbum.Title}"
+                           LineBreakMode="TailTruncation"
+                           MaxLines="1"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="End"
+                           Style="{StaticResource Headline}"
+                           FontSize="70"
+                           SemanticProperties.HeadingLevel="Level1"
+                           FontAttributes="Bold"/>
+
+                    <Label Grid.Column="1"
+                           Grid.Row="1"
+                           TextColor="LightGray"
+                           LineBreakMode="TailTruncation"
+                           MaxLines="1"
+                           HorizontalTextAlignment="Start"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Center"
+                           Style="{StaticResource Headline}"
+                           FontSize="18"
+                           IsEnabled="True">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowArtistDetailCommand}" />
+                        </Label.GestureRecognizers>
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0} • {1}">
+                                <Binding Path="CurrentAlbum.Artist.Name"/>
+                                <Binding Path="CurrentAlbum.Year"/>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </Grid>
+
+                <CollectionView x:Name="SongsCollectio"
+                                ItemsSource="{Binding CurrentAlbum.Songs}"
+                                SelectedItem="{Binding SelectedSong}"
+                                ItemsLayout="VerticalList"
+                                Margin="12, 0, 0, 0"
+                                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10"
+                                  ColumnSpacing="15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding TrackNum}"
+                                       TextColor="LightGray"
+                                       WidthRequest="20"
+                                       HorizontalTextAlignment="End"
+                                       HorizontalOptions="End"/>
+                                <Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       Grid.Column="1"/>
+                            </Grid>
+                            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        <toolkit:MediaElement Grid.Row="1"
+                              x:Name="AudioPlayer"
+                              ShouldAutoPlay="True"
+                              ShouldKeepScreenOn="True"
+                              Source="{Binding SelectedSong.File}" />
+
+    </Grid>
+</ContentPage>

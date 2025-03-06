@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MusicAppMaui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MusicAppMaui"
+    xmlns:pages="clr-namespace:MusicAppMaui.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="MusicAppMaui">
+
+
+    <FlyoutItem Title="Home">
+        <FlyoutItem.Icon>
+            <FontImageSource Glyph="home" FontFamily="MaterialIcons" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate pages:HomePage}"
+                      Route="home" />
+    </FlyoutItem>
+
+
+    <FlyoutItem Title="Playlists">
+        <FlyoutItem.Icon>
+            <FontImageSource Glyph="album" FontFamily="MaterialIcons" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate pages:PlaylistsPage}"
+                      Route="playlists"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Settings">
+        <FlyoutItem.Icon>
+            <FontImageSource Glyph="settings" FontFamily="MaterialIcons" />
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate pages:AlbumsPage}"
+                  Route="albums"/>
+    </FlyoutItem>
+
+</Shell>

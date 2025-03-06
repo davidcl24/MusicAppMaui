@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicAppMaui.Pages.ArtistDetailPage">
+    <ScrollView Grid.Row="0">
+        <VerticalStackLayout>
+            <Grid Padding="10" HorizontalOptions="Start">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="230"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="160" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border StrokeThickness="0"
+                        Background="Black"
+                        StrokeShape="RoundRectangle 100"
+                        HeightRequest="200"
+                        WidthRequest="200"
+                        Grid.RowSpan="2">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" 
+                            Radius="15" 
+                            Offset="0,0" 
+                            Opacity="0.3"/>
+                    </Border.Shadow>
+                    <Image Source="{Binding CurrentArtist.ArtistThumbnail}" 
+                           Aspect="AspectFill"
+                           HeightRequest="200"
+                           WidthRequest="200">
+                    </Image>
+                </Border>
+
+                <Label Grid.Column="1"
+                       Text="{Binding CurrentArtist.Name}"
+                       LineBreakMode="TailTruncation"
+                       MaxLines="1"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Start"
+                       Style="{StaticResource Headline}"
+                       FontSize="70"
+                       SemanticProperties.HeadingLevel="Level1"
+                       FontAttributes="Bold"/>
+            </Grid>
+
+
+            <Label Text="Albums"
+                   Margin="30, 20, 0, 10"
+                    Style="{StaticResource Headline}"
+                    FontAttributes="Bold"
+                    SemanticProperties.HeadingLevel="Level1" 
+                    HorizontalTextAlignment="Start"
+                    HorizontalOptions="Start"/>  
+
+
+            <CollectionView x:Name="AlbumsCollection"
+                            ItemsSource="{Binding CurrentArtist.Albums}"
+                            SelectedItem="{Binding SelectedAlbum}"
+                            SelectionChangedCommand="{Binding ShowAlbumDetailCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference AlbumsCollection}}"
+                            ItemsLayout="HorizontalList"
+                            SelectionMode="Single"
+                            Margin="20, 0, 0, 0"> 
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="140" />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border StrokeThickness="0"
+                                     Background="Black"
+                                     StrokeShape="RoundRectangle 10"
+                                     HeightRequest="140"
+                                     WidthRequest="140">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" 
+                                             Radius="15" 
+                                             Offset="0,0" 
+                                             Opacity="0.3"/>
+                                </Border.Shadow>
+                                <Image Source="{Binding Picture}" 
+                                        Aspect="AspectFill"
+                                        HeightRequest="140"
+                                        WidthRequest="140">
+                                </Image>
+                            </Border>
+                            <Label Grid.Row="1"
+                                    Text="{Binding Title}"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="1"
+                                    WidthRequest="140"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Start"
+                                    FontAttributes="Bold"/>
+                            <Label Grid.Row="2"
+                                    Text="{Binding Artist.Name}"
+                                    MaxLines="1"
+                                    WidthRequest="140"
+                                    HorizontalOptions="Fill"
+                                    LineBreakMode="TailTruncation"
+                                    TextColor="LightGrey"
+                                    VerticalOptions="Start"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+ 
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
