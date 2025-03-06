@@ -4,6 +4,7 @@ using MusicAppMaui.PageModels;
 using MusicAppMaui.Pages;
 using MusicAppMaui.Rest;
 using CommunityToolkit.Maui;
+using Microsoft.UI.Xaml.Controls;
 
 
 namespace MusicAppMaui;
@@ -37,8 +38,24 @@ public static class MauiProgram
         builder.Services.AddSingleton<HttpClient>();
         builder.Services.AddSingleton<RestService>(sp => new (Consts.BASE_URL, sp.GetRequiredService<HttpClient>()));
 
+        Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping("NoBorder", (handler, view) =>
+        {
+#if WINDOWS
+            if (handler.PlatformView is ComboBox comboBox)
+            {
+                comboBox.BorderThickness = new Microsoft.UI.Xaml.Thickness(0); 
+                comboBox.Background = null; 
+            }
+#elif ANDROID
+            handler.PlatformView.Background = null; 
+#elif IOS
+            handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None; 
+#endif
+        });
+
+
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         return builder.Build();

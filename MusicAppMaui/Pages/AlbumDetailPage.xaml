@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="albumDetailPage"
              x:Class="MusicAppMaui.Pages.AlbumDetailPage">
 
     <Grid>
@@ -75,7 +76,7 @@
                     </Label>
                 </Grid>
 
-                <CollectionView x:Name="SongsCollectio"
+                <CollectionView x:Name="SongsCollection"
                                 ItemsSource="{Binding CurrentAlbum.Songs}"
                                 SelectedItem="{Binding SelectedSong}"
                                 ItemsLayout="VerticalList"
@@ -83,11 +84,12 @@
                                 SelectionMode="Single">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="10"
+                            <Grid Padding="5"
                                   ColumnSpacing="15">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Label Text="{Binding TrackNum}"
                                        TextColor="LightGray"
@@ -97,6 +99,23 @@
                                 <Label Text="{Binding Title}"
                                        FontAttributes="Bold"
                                        Grid.Column="1"/>
+                                <Picker Grid.Column="2"
+                                        HeightRequest="10"
+                                        WidthRequest="30"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        ItemsSource="{Binding Source={x:Reference albumDetailPage}, Path=BindingContext.PlayLists}"
+                                        ItemDisplayBinding="{Binding Title}"
+                                        SelectedItem="{Binding Source={x:Reference albumDetailPage}, Path=BindingContext.SelectedPlaylist}"
+                                        SelectedIndexChanged="Picker_SelectedIndexChanged">
+                                    <Picker.Triggers>
+                                        <DataTrigger TargetType="Picker"
+                                                     Binding="{Binding Source={x:Reference albumDetailPage}, Path=BindingContext.SelectedSong}"
+                                                     Value="{x:Null}">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                    </Picker.Triggers>
+                                </Picker>
                             </Grid>
                             
                         </DataTemplate>

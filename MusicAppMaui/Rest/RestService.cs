@@ -26,13 +26,17 @@ public class RestService
 
     public async Task<Song> GetSongByIdAsync(int id) => await _client.GetFromJsonAsync<Song>($"{_baseUrl}songs/{id}");
 
+    public async void UpdateSong(Song song) => await _client.PatchAsJsonAsync<Song>($"{_baseUrl}songs/{song.Id}", song);
+    
+    public async void UpdateSongPlaylist(Song song, Playlist playlist) => await _client.PatchAsJsonAsync<Playlist>($"{_baseUrl}songs/{song.Id}/playlists/{playlist.Id}", playlist);
+
     public async Task<List<Playlist>> GetSongPlaylistsAsync(int id) => await _client.GetFromJsonAsync<List<Playlist>>($"{_baseUrl}songs/{id}/playlists");
 
     public async Task<List<Playlist>> GetPlaylistsAsync() => await _client.GetFromJsonAsync<List<Playlist>>($"{_baseUrl}playlists");
  
     public async Task<Playlist> GetPlaylistByIdAsync(int id) => await _client.GetFromJsonAsync<Playlist>($"{_baseUrl}playlists/{id}");
 
-    public async void PostPlaylistAsync(Playlist playlist) => await _client.PostAsJsonAsync<Playlist>($"{_baseUrl}playlists", playlist);
+    public async Task<HttpResponseMessage> PostPlaylistAsync(Playlist playlist) => await _client.PostAsJsonAsync<Playlist>($"{_baseUrl}playlists", playlist);
 
     public async Task<List<AlbumExtended>> GetAlbumsAsync() => await _client.GetFromJsonAsync<List<AlbumExtended>>($"{_baseUrl}albums");
 

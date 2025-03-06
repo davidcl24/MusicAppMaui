@@ -33,8 +33,8 @@ public partial class PlaylistsPageModel : ObservableObject
 
         if (result is (string name, string desc)) 
         {
-            restService.PostPlaylistAsync(new Playlist{Title=name, Description=desc});
-           
+            await restService.PostPlaylistAsync(new Playlist{Title=name, Description=desc});
+            GetListsAsync();  
         }
     }
 
