@@ -3,46 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MusicAppMaui.Pages.PlaylistsPage">
     <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="70" />
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
 
-            <ScrollView Grid.Row="0">
-                <VerticalStackLayout Padding="30,0" Spacing="25">
-                    <Label Text="Tus Listas de Reproducción"
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="30,0" Spacing="25">
+                <Label Text="Tus Listas de Reproducción"
                            Style="{StaticResource Headline}"
                            FontAttributes="Bold"
                            SemanticProperties.HeadingLevel="Level1" 
                            HorizontalTextAlignment="Start"
                            HorizontalOptions="Start"/>
 
-                    <CollectionView x:Name="PlaylistsCollection"
+                <CollectionView x:Name="PlaylistsCollection"
                                     ItemsSource="{Binding Playlists}"
                                     SelectionMode="Single"
                                     VerticalOptions="FillAndExpand">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical"
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
                                              Span="2" />
-                        </CollectionView.ItemsLayout>
+                    </CollectionView.ItemsLayout>
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Padding="10"
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10"
                                       ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="140"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                                    <BoxView Grid.Column="0"
+                                <BoxView Grid.Column="0"
                                              BackgroundColor="DarkGrey"
                                              HeightRequest="140"
                                              WidthRequest="140"
                                              HorizontalOptions="Center"
                                              VerticalOptions="Center"/>
 
-                                    <Label Grid.Column="0"
+                                <Label Grid.Column="0"
                                            Text="{Binding Title}"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center"
@@ -52,32 +52,31 @@
                                            LineBreakMode="TailTruncation"
                                            MaxLines="1"/>
 
-                                    <Label Grid.Column="1"
+                                <Label Grid.Column="1"
                                            Text="{Binding Description}"
                                            VerticalOptions="Center"
                                            FontAttributes="Bold"
                                            FontSize="16"
                                            TextColor="White" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                        
-                    </CollectionView>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
-                </VerticalStackLayout>
-                
-            </ScrollView>
+                </CollectionView>
 
-            <Button WidthRequest="60"
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <Button WidthRequest="60"
                     HorizontalOptions="End"
                     Margin="0,0,20,20" 
                     Grid.Row="1" 
                     Command="{Binding ShowPopupCommand}">
-                <Button.ImageSource>
-                    <FontImageSource Glyph="add_circle_outline" FontFamily="MaterialIcons"/>
-                </Button.ImageSource>
-            </Button>
+            <Button.ImageSource>
+                <FontImageSource Glyph="add_circle_outline" FontFamily="MaterialIcons"/>
+            </Button.ImageSource>
+        </Button>
 
     </Grid>
-
 </ContentPage>
