@@ -30,8 +30,8 @@
         <FlyoutItem.Icon>
             <FontImageSource Glyph="settings" FontFamily="MaterialIcons" />
         </FlyoutItem.Icon>
-        <ShellContent ContentTemplate="{DataTemplate pages:AlbumsPage}"
-                  Route="albums"/>
+        <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"
+                  Route="settings"/>
     </FlyoutItem>
 
 </Shell>

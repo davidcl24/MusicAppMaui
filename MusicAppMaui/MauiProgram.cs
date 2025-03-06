@@ -27,12 +27,12 @@ public static class MauiProgram
 
         builder.Services.AddScoped<HomePageModel>();
         builder.Services.AddScoped<PlaylistsPageModel>();
-        builder.Services.AddScoped<AlbumsPageModel>();
+        builder.Services.AddScoped<SettingsPageModel>();
         builder.Services.AddScoped<AlbumDetailPageModel>();
         builder.Services.AddScoped<ArtistDetailPageModel>();
         builder.Services.AddScoped<ArtistDetailPage>();
         builder.Services.AddScoped<AlbumDetailPage>();
-        builder.Services.AddTransient<AlbumsPage>();
+        builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<PlaylistsPage>();
         builder.Services.AddSingleton<HttpClient>();
